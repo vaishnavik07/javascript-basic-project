@@ -1,0 +1,127 @@
+<!-- 1: Two players ate there both will chose a number
+after they have made their selection, roll the dice,
+Also take names of both the players and display them
+person 1 : 
+person2 : 
+no result: -->
+
+<!-- incomplete code check lecture 20 -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roll the dice</title>
+</head>
+<body>
+    player1: <input type="text" name="player" value="sakshi">
+    <button class="dice" id="1">Roll the dice</button>
+    Value you got  <span></span><br><br>
+    
+    player2: <input type="text" name="player" value="shreya">
+    <button class="dice" id="2">Roll the dice</button>
+    Value you got <span></span><br><br>
+
+    
+    player3: <input type="text" name="player" value="soham">
+    <button class="dice" id="3">Roll the dice</button>
+    Value you got <span></span><br><br>
+
+    
+    player4: <input type="text" name="player" value="sheetal">
+    <button class="dice" id="4">Roll the dice</button>
+    Value you got <span></span><br><br>
+
+    
+    player5: <input type="text" name="player" value="sahil">
+    <button class="dice" id="5">Roll the dice</button>
+    Value you got <span></span><br><br>
+
+
+
+    <button id="end">End Game</button>
+    <div class="result"></div>
+
+    <script>
+        player=document.querySelectorAll('input')
+        btn=document.getElementsByClassName('dice')
+        result=document.getElementsByTagName('span')
+
+        endbtn=document.getElementById('end')
+        win=document.querySelector(".result")
+
+        endbtn.disabled=true;
+
+        for(t of btn)
+        {
+            t.addEventListener('click',rollDice);
+        }
+
+        click=0
+        function rollDice(e)
+        {
+            click++;
+            if(click==5)
+            {
+                endbtn.disabled=false;
+            }
+            user_id=e.target.id-1;
+            btn[user_id].disabled=true;
+            choice=[1,2,3,4,5,6];
+            ans=choice[parseInt(Math.random()*choice.length)];
+            result[user_id].innerText=ans;
+        }
+
+        endbtn.addEventListener('click',winner)
+        
+        function winner(){
+            endbtn.disabled=true;
+            max=result[0].innerText;
+            pos=[];
+            for(t of result){
+                if(t.innerText>max){
+                    max=t.innerText;
+                }
+            }
+
+            for(i=0;i<result.length;i++){
+                if(result[i].innerText==max)
+                {
+                    pos.push(i);
+                }
+            }
+            names=""
+
+            for(t of pos)
+            {
+                names=names+player[t].value+", ";
+            }
+            console.log(names);
+            win.innerText=`winner is ${names} as score is ${max}`;
+            // let winners=[];
+            // random_no=parseInt(Math.random()*6);
+            // for(t in result){
+            //     ans=result[t].innerText;
+                
+            //     if(random_no==ans)
+            //     {
+            //         winners.push(player[t].value);
+            //     }
+            // }
+            // name=""
+            // for(t of winners){
+            //     name=name+t+", ";
+            // }
+            // console.log(name)
+            // win.innerHTML=name//`Winner of game is ${name} as score is ${random_no}`;
+            // // winmsg.innerText=name
+        }
+
+
+
+    </script>
+</body>
+</html>
